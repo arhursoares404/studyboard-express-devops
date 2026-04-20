@@ -25,6 +25,14 @@ arquivo `.env.example`.
 npm test
 ```
 
+## Smoke test
+
+Com o servidor em execução, também é possível validar rapidamente a API:
+
+```bash
+npm run smoke
+```
+
 ## Docker
 
 ```bash
