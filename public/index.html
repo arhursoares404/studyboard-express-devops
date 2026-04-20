@@ -53,6 +53,35 @@
         color: var(--muted);
       }
 
+      nav {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
+        flex-wrap: wrap;
+      }
+
+      .button-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 160px;
+        padding: 12px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--accent);
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .button-link.primary {
+        background: var(--accent);
+        color: white;
+      }
+
+      .button-link.secondary {
+        color: var(--accent);
+        background: transparent;
+      }
+
       .tag {
         display: inline-block;
         margin-bottom: 16px;
@@ -115,6 +144,11 @@
             <span>Build validada em workflow</span>
           </article>
         </div>
+
+        <nav>
+          <a class="button-link primary" href="/api/status">Ver status da API</a>
+          <a class="button-link secondary" href="/about.html">Sobre o projeto</a>
+        </nav>
 
         <p class="footer-note">
           Endpoint de verificação: <code>/api/status</code>
