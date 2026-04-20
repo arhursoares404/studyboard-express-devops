@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyBoard Express</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4efe7;
+        --panel: #fffaf4;
+        --text: #222222;
+        --muted: #5f5a55;
+        --accent: #b85c38;
+        --accent-soft: #f2d0c3;
+        --border: #d9c8bb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background:
+          radial-gradient(circle at top right, #ffe8d6 0, transparent 24%),
+          linear-gradient(180deg, #f4efe7 0%, #efe4d5 100%);
+        color: var(--text);
+      }
+
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 48px 20px 64px;
+      }
+
+      .hero {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 18px 40px rgba(79, 52, 35, 0.08);
+      }
+
+      h1 {
+        margin-top: 0;
+        font-size: clamp(2rem, 4vw, 3.5rem);
+      }
+
+      p {
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      .tag {
+        display: inline-block;
+        margin-bottom: 16px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .card {
+        padding: 18px;
+        border-radius: 18px;
+        background: white;
+        border: 1px solid var(--border);
+      }
+
+      .card strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .footer-note {
+        margin-top: 28px;
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <span class="tag">DevOps Lab</span>
+        <h1>StudyBoard Express</h1>
+        <p>
+          Este projeto foi criado para praticar Git, GitHub Actions, Docker e o
+          fluxo de CI/CD de uma aplicação Node.js simples.
+        </p>
+
+        <div class="grid">
+          <article class="card">
+            <strong>Stack</strong>
+            <span>Node.js + Express</span>
+          </article>
+          <article class="card">
+            <strong>Teste</strong>
+            <span>Jest com Supertest</span>
+          </article>
+          <article class="card">
+            <strong>Entrega</strong>
+            <span>Build validada em workflow</span>
+          </article>
+        </div>
+
+        <p class="footer-note">
+          Endpoint de verificação: <code>/api/status</code>
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

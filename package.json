@@ -1,0 +1,30 @@
+{
+  "name": "studyboard-express",
+  "version": "1.0.0",
+  "description": "Projeto simples em Express para praticar fluxo de CI/CD e Docker.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "jest --runInBand",
+    "ci:check": "npm run test"
+  },
+  "keywords": [
+    "express",
+    "devops",
+    "docker",
+    "github-actions"
+  ],
+  "author": "Arthur",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "supertest": "^7.1.4"
+  }
+}
