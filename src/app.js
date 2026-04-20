@@ -14,4 +14,11 @@ app.get("/api/status", (_req, res) => {
   });
 });
 
+app.use((_req, res) => {
+  res.status(404).json({
+    status: "error",
+    message: "Rota nao encontrada"
+  });
+});
+
 module.exports = app;

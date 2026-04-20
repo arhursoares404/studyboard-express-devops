@@ -7,7 +7,8 @@
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "test": "jest --runInBand",
-    "ci:check": "npm run test"
+    "ci:check": "npm run test",
+    "smoke": "node scripts/smoke-check.js"
   },
   "keywords": [
     "express",

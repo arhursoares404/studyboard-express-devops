@@ -1,11 +1,17 @@
 # StudyBoard Express
 
-Projeto simples em Node.js com Express criado para praticar:
+Projeto simples em Node.js com Express criado para a disciplina de DevOps.
+O objetivo deste repositório é demonstrar um fluxo básico de Git, GitHub
+Actions, pull request e Docker em uma aplicação pequena e fácil de entender.
 
-- versionamento com Git e GitHub
-- integração contínua com GitHub Actions
-- entrega contínua com build em workflow
-- empacotamento da aplicação com Docker
+## Tecnologias
+
+- Node.js
+- Express
+- Jest
+- Supertest
+- Docker
+- GitHub Actions
 
 ## Como rodar localmente
 
@@ -14,7 +20,10 @@ npm install
 npm start
 ```
 
-Aplicação disponível em `http://localhost:3000`.
+A aplicação fica disponível em `http://localhost:3000`.
+
+Se quiser alterar a porta, use o arquivo `.env.example` como base para criar
+um `.env`.
 
 ## Testes
 
@@ -22,9 +31,18 @@ Aplicação disponível em `http://localhost:3000`.
 npm test
 ```
 
+## Smoke test
+
+Com a aplicação rodando localmente:
+
+```bash
+npm run smoke
+```
+
 ## Docker
 
 ```bash
 docker build -t studyboard-express .
 docker run -d -p 3000:3000 --name studyboard studyboard-express
+docker ps
 ```
