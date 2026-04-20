@@ -16,6 +16,9 @@ npm start
 
 Aplicação disponível em `http://localhost:3000`.
 
+Se quiser alterar a porta localmente, crie um arquivo `.env` com base no
+arquivo `.env.example`.
+
 ## Testes
 
 ```bash
@@ -27,4 +30,10 @@ npm test
 ```bash
 docker build -t studyboard-express .
 docker run -d -p 3000:3000 --name studyboard studyboard-express
+```
+
+Para validar o container em execução, um comando útil é:
+
+```bash
+docker ps
 ```
