@@ -28,3 +28,11 @@ jobs:
 
       - name: Run automated tests
         run: npm run ci:check
+
+      - name: Run smoke test
+        run: |
+          npm start &
+          APP_PID=$!
+          sleep 5
+          npm run smoke
+          kill $APP_PID
