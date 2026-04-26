@@ -19,6 +19,26 @@ describe("StudyBoard Express", () => {
     expect(response.text).toContain("StudyBoard Express");
   });
 
+  test("GET /about.html should serve about page", async () => {
+    const response = await request(app).get("/about.html");
+
+    expect(response.statusCode).toBe(200);
+    expect(response.text).toContain("Sobre este projeto");
+  });
+
+  test("GET /api/status should return numeric port", async () => {
+    const response = await request(app).get("/api/status");
+
+    expect(typeof response.body.port).toBe("number");
+    expect(Number.isNaN(response.body.port)).toBe(false);
+  });
+
+  test("GET /api/status should use JSON content type", async () => {
+    const response = await request(app).get("/api/status");
+
+    expect(response.headers["content-type"]).toContain("application/json");
+  });
+
   test("GET unknown route should return 404", async () => {
     const response = await request(app).get("/rota-inexistente");
 

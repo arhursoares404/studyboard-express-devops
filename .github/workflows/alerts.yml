@@ -1,0 +1,54 @@
+name: Alerts
+
+on:
+  push:
+    branches:
+      - main
+      - "feature/**"
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+    branches:
+      - main
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip when webhook secret is missing
+        if: ${{ secrets.DISCORD_WEBHOOK_URL == '' }}
+        run: echo "DISCORD_WEBHOOK_URL is not configured. Skipping notification."
+
+      - name: Send Discord alert
+        if: ${{ secrets.DISCORD_WEBHOOK_URL != '' }}
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          EVENT_NAME: ${{ github.event_name }}
+          REPOSITORY: ${{ github.repository }}
+          ACTOR: ${{ github.actor }}
+          REF_NAME: ${{ github.ref_name }}
+          SHA: ${{ github.sha }}
+          SERVER_URL: ${{ github.server_url }}
+          RUN_ID: ${{ github.run_id }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_MERGED: ${{ github.event.pull_request.merged }}
+        run: |
+          SHORT_SHA="${SHA::7}"
+          RUN_URL="${SERVER_URL}/${REPOSITORY}/actions/runs/${RUN_ID}"
+
+          if [ "$EVENT_NAME" = "pull_request" ] && [ -n "$PR_NUMBER" ]; then
+            if [ "$PR_MERGED" = "true" ]; then
+              CONTENT=":white_check_mark: PR #${PR_NUMBER} merged on ${REPOSITORY} by ${ACTOR}. Branch: ${REF_NAME}. Run: ${RUN_URL}"
+            else
+              CONTENT=":bell: PR #${PR_NUMBER} updated on ${REPOSITORY} by ${ACTOR}. Branch: ${REF_NAME}. Run: ${RUN_URL}"
+            fi
+          else
+            CONTENT=":rocket: New push on ${REPOSITORY} by ${ACTOR}. Branch: ${REF_NAME}. Commit: ${SHORT_SHA}. Run: ${RUN_URL}"
+          fi
+
+          curl -sS -X POST "$DISCORD_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "{\"content\":\"${CONTENT}\"}"

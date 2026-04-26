@@ -46,3 +46,12 @@ docker build -t studyboard-express .
 docker run -d -p 3000:3000 --name studyboard studyboard-express
 docker ps
 ```
+
+## Alertas no Discord via GitHub Actions
+
+1. Crie um webhook no canal do Discord.
+2. No GitHub, acesse `Settings > Secrets and variables > Actions`.
+3. Cadastre o secret `DISCORD_WEBHOOK_URL` com a URL do webhook.
+4. O workflow `.github/workflows/alerts.yml` envia alertas em:
+   - push em `main` e `feature/**`
+   - eventos de PR para `main` (opened, synchronize, reopened, closed/merged)
