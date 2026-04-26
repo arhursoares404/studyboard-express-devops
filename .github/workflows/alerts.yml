@@ -18,12 +18,7 @@ jobs:
   notify-discord:
     runs-on: ubuntu-latest
     steps:
-      - name: Skip when webhook secret is missing
-        if: ${{ secrets.DISCORD_WEBHOOK_URL == '' }}
-        run: echo "DISCORD_WEBHOOK_URL is not configured. Skipping notification."
-
       - name: Send Discord alert
-        if: ${{ secrets.DISCORD_WEBHOOK_URL != '' }}
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           EVENT_NAME: ${{ github.event_name }}
@@ -33,9 +28,14 @@ jobs:
           SHA: ${{ github.sha }}
           SERVER_URL: ${{ github.server_url }}
           RUN_ID: ${{ github.run_id }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          PR_MERGED: ${{ github.event.pull_request.merged }}
+          PR_NUMBER: ${{ github.event_name == 'pull_request' && github.event.pull_request.number || '' }}
+          PR_MERGED: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged || '' }}
         run: |
+          if [ -z "$DISCORD_WEBHOOK_URL" ]; then
+            echo "DISCORD_WEBHOOK_URL is not configured. Skipping notification."
+            exit 0
+          fi
+
           SHORT_SHA="${SHA::7}"
           RUN_URL="${SERVER_URL}/${REPOSITORY}/actions/runs/${RUN_ID}"
 
